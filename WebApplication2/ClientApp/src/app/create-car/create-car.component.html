@@ -1,0 +1,42 @@
+<form *ngIf="car" #carForm="ngForm" (ngSubmit)="save(car)" novalidate>
+
+  <h1>Create Car</h1>
+
+  <div class="form-group">
+    <label for="make">Make</label>
+    <input type="text" class="form-control" id="make" [(ngModel)]="car.Make" name="Make" required />
+  </div>
+
+  <div class="form-group">
+    <label for="model">Model</label>
+    <input type="text" class="form-control" id="model" [(ngModel)]="car.Model" name="Model" required />
+  </div>
+
+  <div class="form-group">
+    <label for="engine">Engine</label>
+    <input type="text" class="form-control" id="engine" [(ngModel)]="car.Engine" name="Engine" required />
+  </div>
+
+  <div class="form-group">
+    <label for="doors">Doors</label>
+    <input type="number" class="form-control" id="doors" [(ngModel)]="car.Doors" name="Doors" required />
+  </div>
+
+  <div class="form-group">
+    <label for="wheels">Wheels</label>
+    <input type="number" class="form-control" id="wheels" [(ngModel)]="car.Wheels" name="Wheels" required />
+  </div>
+
+  <div class="form-group">
+    <label for="bodyType">Body Type</label>
+    <select id="bodyType" class="form-control" [(ngModel)]="car.BodyType" name="BodyType">
+      <option *ngFor="let b of BodyTypes" value="{{b.id}}">
+        {{b.type}}
+      </option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="!carForm.form.valid">Save</button>
+</form>
+
+
