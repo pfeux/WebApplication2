@@ -1,0 +1,35 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - hathiwala
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: azure/docker-login@v1
+      with:
+        login-server: https://hathiwalas.azurecr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_52ad04797cea4603adc88e6d6f6cc033 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_e2a23334500f4a7c89425b0477a7e8fa }}
+
+    - run: |
+        docker build . -t hathiwalas.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_52ad04797cea4603adc88e6d6f6cc033 }}/duplicatefilefinderapi:${{ github.sha }}
+        docker push hathiwalas.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_52ad04797cea4603adc88e6d6f6cc033 }}/duplicatefilefinderapi:${{ github.sha }}
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'hathiwala'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_37d478121d294eb3ab36b737dd507e48 }}
+        images: 'hathiwalas.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_52ad04797cea4603adc88e6d6f6cc033 }}/duplicatefilefinderapi:${{ github.sha }}'
