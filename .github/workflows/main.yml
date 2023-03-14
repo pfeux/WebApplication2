@@ -1,6 +1,16 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} is learning Github Actions
-on: [push]
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: Environment
+        required: true
+        options:
+          - Production AU
+          - Production LATAM
+          - ALL Production
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
