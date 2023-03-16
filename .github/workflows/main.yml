@@ -1,16 +1,6 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} is learning Github Actions
-on: 
-  workflow_dispatch:
-    inputs:
-      environment:
-        type: choice
-        description: Environment
-        required: true
-        options:
-          - Production AU
-          - Production LATAM
-          - ALL Production
+on: [push]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
@@ -39,12 +29,8 @@ jobs:
               print(response)
           EOF
           )
-          echo "::set-output name=pythonScript::$PYTHON_SCRIPT"
+          python -c "$PYTHON_SCRIPT"
       
-      - name: Execute python script
-        run: |
-          python -c "${{ steps.python-script.outputs.pythonScript }}"
-  
   check-node-version:
     runs-on: ubuntu-latest
     steps:
