@@ -20,21 +20,22 @@ jobs:
         with:
           python-version: 3.11.0
       - run: |
-          PYTHON_SCRIPT=$(cat << EOF
-            import json, urllib.request
-            with open('/mnt/c/Kishan/repos/csn.showroom.cms.api/ConsumerPact.Tests/bin/Debug/pacts/Csn.Showroom.CMS.Api-Csn.Showroom.Spec.Api.json') as json_data:
-                pact = json.load(json_data)
-                pact_url = 'http://pact-broker.stg.commercial.csnglobal.net/pacts/provider/{}/consumer/{}/version/{}'.format(pact['provider']['name'],pact['consumer']['name'], 1)
-                opener = urllib.request.build_opener(urllib.request.HTTPHandler)
-                request = urllib.request.Request(pact_url, data=json.dumps(pact).encode('utf-8'))
-                request.add_header('Content-Type', 'application/json')
-                request.add_header('Authorization','Basic dXfltyFMgNOFZAxr8io9wJ37iUpY42M:O5AIZWxelWbLvqMd8PkAVycBJh2Psyg1')
-                request.get_method = lambda: 'PUT'
-                print(pact_url)
-                url = opener.open(request, timeout = 10)
-                response = url.read()
-                print(response)
+          PYTHON_SCRIPT=$(cat <<EOF
+          import json, urllib.request
+          with open('/mnt/c/Kishan/repos/csn.showroom.cms.api/ConsumerPact.Tests/bin/Debug/pacts/Csn.Showroom.CMS.Api-Csn.Showroom.Spec.Api.json') as json_data:
+              pact = json.load(json_data)
+              pact_url = 'http://pact-broker.stg.commercial.csnglobal.net/pacts/provider/{}/consumer/{}/version/{}'.format(pact['provider']['name'],pact['consumer']['name'], 1)
+              opener = urllib.request.build_opener(urllib.request.HTTPHandler)
+              request = urllib.request.Request(pact_url, data=json.dumps(pact).encode('utf-8'))
+              request.add_header('Content-Type', 'application/json')
+              request.add_header('Authorization','Basic dXfltyFMgNOFZAxr8io9wJ37iUpY42M:O5AIZWxelWbLvqMd8PkAVycBJh2Psyg1')
+              request.get_method = lambda: 'PUT'
+              print(pact_url)
+              url = opener.open(request, timeout = 10)
+              response = url.read()
+              print(response)
           )
+          echo "::set-output name=content::$PYTHON_SCRIPT"
       - run: |
           python -c $PYTHON_SCRIPT
   
