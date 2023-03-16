@@ -39,7 +39,9 @@ jobs:
               print(response)
           EOF
           )
+          echo "text<<EOF" >> $GITHUB_OUTPUT
           echo "pythonScript=$PYTHON_SCRIPT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
       
       - name: Execute python script
         run: |
