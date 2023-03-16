@@ -34,6 +34,7 @@ jobs:
               url = opener.open(request, timeout = 10)
               response = url.read()
               print(response)
+          EOF
           )
           echo "::set-output name=content::$PYTHON_SCRIPT"
       - run: |
