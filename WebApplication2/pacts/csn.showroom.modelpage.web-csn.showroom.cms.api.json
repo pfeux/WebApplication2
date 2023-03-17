@@ -1,0 +1,252 @@
+{
+  "consumer": {
+    "name": "Csn.Showroom.ModelPage.Web"
+  },
+  "provider": {
+    "name": "Csn.Showroom.CMS.Api"
+  },
+  "interactions": [
+    {
+      "description": "A GET request to retrieve recommendations list for a listed path",
+      "providerState": "A valid recommendation to retrieve",
+      "request": {
+        "method": "get",
+        "path": "/api/v1/recommendation",
+        "query": "make=make1&model=model1&badge=badge1&bodystyle=Ute&limit=8",
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": [
+          "recommendation"
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 1
+          },
+          "$.body[*].*": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "A GET request to retrieve valid seo mappings for a listed path",
+      "providerState": "A valid seo mappings to retrieve",
+      "request": {
+        "method": "get",
+        "path": "/api/v1/seo",
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "bodyStyles": [
+            {
+              "key": "sedan",
+              "value": "Sedan"
+            }
+          ],
+          "makes": [
+            {
+              "key": "alfa-romeo",
+              "value": "Alfa-Romeo",
+              "models": [
+                {
+                  "key": "stelvio",
+                  "value": "Stelvio",
+                  "badges": [
+                    {
+                      "key": "ti",
+                      "value": "Ti"
+                    }
+                  ],
+                  "bodyStyles": [
+                    "coupe"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "matchingRules": {
+          "$.body.bodyStyles": {
+            "min": 1
+          },
+          "$.body.bodyStyles[*].*": {
+            "match": "type"
+          },
+          "$.body.bodyStyles[*].key": {
+            "match": "type"
+          },
+          "$.body.bodyStyles[*].value": {
+            "match": "type"
+          },
+          "$.body.makes": {
+            "min": 1
+          },
+          "$.body.makes[*].*": {
+            "match": "type"
+          },
+          "$.body.makes[*].key": {
+            "match": "type"
+          },
+          "$.body.makes[*].value": {
+            "match": "type"
+          },
+          "$.body.makes[*].models": {
+            "min": 1
+          },
+          "$.body.makes[*].models[*].*": {
+            "match": "type"
+          },
+          "$.body.makes[*].models[*].key": {
+            "match": "type"
+          },
+          "$.body.makes[*].models[*].value": {
+            "match": "type"
+          },
+          "$.body.makes[*].models[*].badges": {
+            "min": 1
+          },
+          "$.body.makes[*].models[*].badges[*].*": {
+            "match": "type"
+          },
+          "$.body.makes[*].models[*].badges[*].key": {
+            "match": "type"
+          },
+          "$.body.makes[*].models[*].badges[*].value": {
+            "match": "type"
+          },
+          "$.body.makes[*].models[*].bodyStyles": {
+            "min": 1
+          },
+          "$.body.makes[*].models[*].bodyStyles[*].*": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "A POST request to retrieve page data for page type Model, content types Make,Model,Badge with Make=Mercedes-Benz and Model=Sprinter",
+      "providerState": "Page data exists for page type Model",
+      "request": {
+        "method": "post",
+        "path": "/api/v1/page/carsales/search",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "searchDateTime": "2022-05-24T10:28:37.0298653+10:00",
+          "pageStatus": [
+            "Active"
+          ],
+          "contentFilters": [
+            {
+              "contentType": "Make",
+              "contentValue": "Mercedes-Benz"
+            },
+            {
+              "contentType": "Model",
+              "contentValue": "Sprinter"
+            }
+          ],
+          "selectContent": [
+            "Make",
+            "Model",
+            "Badge"
+          ],
+          "isActive": true,
+          "pageType": "Model"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": [
+          {
+            "id": 3000,
+            "tenant": "carsales",
+            "pageType": "Model",
+            "url": "url",
+            "isActive": true,
+            "contents": [
+              {
+                "id": 2000,
+                "contentType": "type",
+                "contentValue": "value",
+                "contentGroup": "",
+                "contentStatus": "status",
+                "sequence": 99
+              }
+            ]
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 1
+          },
+          "$.body[*].*": {
+            "match": "type"
+          },
+          "$.body[*].id": {
+            "match": "type"
+          },
+          "$.body[*].tenant": {
+            "match": "type"
+          },
+          "$.body[*].pageType": {
+            "match": "type"
+          },
+          "$.body[*].url": {
+            "match": "type"
+          },
+          "$.body[*].isActive": {
+            "match": "type"
+          },
+          "$.body[*].contents": {
+            "min": 1
+          },
+          "$.body[*].contents[*].*": {
+            "match": "type"
+          },
+          "$.body[*].contents[*].id": {
+            "match": "type"
+          },
+          "$.body[*].contents[*].contentType": {
+            "match": "type"
+          },
+          "$.body[*].contents[*].contentValue": {
+            "match": "type"
+          },
+          "$.body[*].contents[*].contentGroup": {
+            "match": "type"
+          },
+          "$.body[*].contents[*].contentStatus": {
+            "match": "type"
+          },
+          "$.body[*].contents[*].sequence": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

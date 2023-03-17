@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.156
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33417.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{3401624B-BF1C-43C4-99F3-78F28629C8E2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5E46272E-727E-4F3C-85EA-14E8C3D56FDA}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Dockerfile = Dockerfile
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{0653093B-E8E5-4597-842E-3FEA3E5F1E77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +19,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3401624B-BF1C-43C4-99F3-78F28629C8E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3401624B-BF1C-43C4-99F3-78F28629C8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3401624B-BF1C-43C4-99F3-78F28629C8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3401624B-BF1C-43C4-99F3-78F28629C8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0653093B-E8E5-4597-842E-3FEA3E5F1E77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0653093B-E8E5-4597-842E-3FEA3E5F1E77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0653093B-E8E5-4597-842E-3FEA3E5F1E77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0653093B-E8E5-4597-842E-3FEA3E5F1E77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

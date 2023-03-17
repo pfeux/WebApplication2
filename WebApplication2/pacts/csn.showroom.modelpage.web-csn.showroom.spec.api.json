@@ -1,0 +1,464 @@
+{
+  "consumer": {
+    "name": "Csn.Showroom.ModelPage.Web"
+  },
+  "provider": {
+    "name": "Csn.Showroom.Spec.Api"
+  },
+  "interactions": [
+    {
+      "description": "A GET request to retrieve valid spot detail with a listed path",
+      "providerState": "A valid spot detail item to retrieve",
+      "request": {
+        "method": "get",
+        "path": "/api/v2/spec/carsales/SPOT-ITM-123456",
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "id": "SPOT-ITM-123456",
+          "make": "Honda",
+          "model": "Civic",
+          "badge": "VTi-LX",
+          "bodyStyle": "Hatch",
+          "modelVersion": "2019 Jan MY19",
+          "releaseYear": 2019,
+          "groupExpression": "Civic:VTi-LX",
+          "priceFrom": 37625.0,
+          "isDriveAway": true,
+          "isCurrentRelease": true,
+          "countryCode": "AU",
+          "datePublished": "2019-10-04T16:33:06",
+          "fuelType": "Petrol - Unleaded ULP",
+          "driveTrain": "2.0i Manual",
+          "badgeFeatures": [
+            {
+              "isKeyFeature": true,
+              "name": "Engine",
+              "value": "4 cylinder Petrol - Unleaded ULP Turbo Intercooled",
+              "isOptional": true
+            }
+          ],
+          "colours": [
+            {
+              "primary": "Black",
+              "manufacturer": "Crystal Black",
+              "price": 575.0,
+              "shade": "Dark",
+              "paintType": "Pearl",
+              "hexValue": "000000",
+              "isDefault": false,
+              "images": [
+                {
+                  "type": "Silhouette",
+                  "primaryColour": "Black",
+                  "manufacturerColour": "Crystal Black",
+                  "angle": "Side - Passenger",
+                  "isSilhouette": true,
+                  "imageSource": "/carsales/general/content/gc5694879405919184460p.png"
+                }
+              ],
+              "colourName": "Crystal Black with Roof"
+            }
+          ],
+          "offers": [
+            {
+              "id": "OFR-ITM-15414",
+              "title": "Honda - Now for the fun bit!",
+              "description": "Selected Civic Hatch models - Free 7-Year Unlimited KM Warranty, 7-Year Premium Roadside Assist & 12-Month Rego & CTP Insurance",
+              "states": [
+                "ACT"
+              ],
+              "inclusions": [
+                {
+                  "type": "Inclusion type",
+                  "value": 0.0,
+                  "disclaimer": "7-Year Unlimited Kilometre Warranty available on new and ex-demo models except those used for commercial purposes, where a 7-year/200,000 kilometre (whichever occurs first) warranty is applicable. Honda warranties apply where due care is exercised by the owner and the vehicle is maintained in accordance with the Owner's Warranty and Service Manual. Please visit honda.com.au/warranty for full terms and conditions.",
+                  "title": "7-Year Unlimited KM Warranty",
+                  "name": "Generic Extra"
+                }
+              ],
+              "disclaimers": [
+                {
+                  "id": 4352,
+                  "index": 154325,
+                  "description": "descrip"
+                }
+              ]
+            }
+          ],
+          "warrantyAndService": {
+            "warrantyYears": "5",
+            "warrantyKm": "Unlimited",
+            "regularServiceKms": "10000",
+            "regularServiceMonths": "12",
+            "warrantyCustomerAssist": ""
+          }
+        },
+        "matchingRules": {
+          "$.body.id": {
+            "match": "type"
+          },
+          "$.body.make": {
+            "match": "type"
+          },
+          "$.body.model": {
+            "match": "type"
+          },
+          "$.body.badge": {
+            "match": "type"
+          },
+          "$.body.bodyStyle": {
+            "match": "type"
+          },
+          "$.body.modelVersion": {
+            "match": "type"
+          },
+          "$.body.releaseYear": {
+            "match": "type"
+          },
+          "$.body.groupExpression": {
+            "match": "type"
+          },
+          "$.body.priceFrom": {
+            "match": "type"
+          },
+          "$.body.isDriveAway": {
+            "match": "type"
+          },
+          "$.body.isCurrentRelease": {
+            "match": "type"
+          },
+          "$.body.countryCode": {
+            "match": "type"
+          },
+          "$.body.datePublished": {
+            "match": "type"
+          },
+          "$.body.fuelType": {
+            "match": "type"
+          },
+          "$.body.driveTrain": {
+            "match": "type"
+          },
+          "$.body.badgeFeatures": {
+            "min": 1
+          },
+          "$.body.badgeFeatures[*].*": {
+            "match": "type"
+          },
+          "$.body.badgeFeatures[*].isKeyFeature": {
+            "match": "type"
+          },
+          "$.body.badgeFeatures[*].name": {
+            "match": "type"
+          },
+          "$.body.badgeFeatures[*].value": {
+            "match": "type"
+          },
+          "$.body.badgeFeatures[*].isOptional": {
+            "match": "type"
+          },
+          "$.body.colours": {
+            "min": 1
+          },
+          "$.body.colours[*].*": {
+            "match": "type"
+          },
+          "$.body.colours[*].primary": {
+            "match": "type"
+          },
+          "$.body.colours[*].manufacturer": {
+            "match": "type"
+          },
+          "$.body.colours[*].price": {
+            "match": "type"
+          },
+          "$.body.colours[*].shade": {
+            "match": "type"
+          },
+          "$.body.colours[*].paintType": {
+            "match": "type"
+          },
+          "$.body.colours[*].hexValue": {
+            "match": "type"
+          },
+          "$.body.colours[*].isDefault": {
+            "match": "type"
+          },
+          "$.body.colours[*].images[0].type": {
+            "match": "type"
+          },
+          "$.body.colours[*].images[0].primaryColour": {
+            "match": "type"
+          },
+          "$.body.colours[*].images[0].manufacturerColour": {
+            "match": "type"
+          },
+          "$.body.colours[*].images[0].angle": {
+            "match": "type"
+          },
+          "$.body.colours[*].images[0].isSilhouette": {
+            "match": "type"
+          },
+          "$.body.colours[*].images[0].imageSource": {
+            "match": "type"
+          },
+          "$.body.colours[*].colourName": {
+            "match": "type"
+          },
+          "$.body.offers": {
+            "min": 1
+          },
+          "$.body.offers[*].*": {
+            "match": "type"
+          },
+          "$.body.offers[*].id": {
+            "match": "type"
+          },
+          "$.body.offers[*].title": {
+            "match": "type"
+          },
+          "$.body.offers[*].description": {
+            "match": "type"
+          },
+          "$.body.offers[*].states": {
+            "min": 1
+          },
+          "$.body.offers[*].states[*].*": {
+            "match": "type"
+          },
+          "$.body.offers[*].inclusions": {
+            "min": 1
+          },
+          "$.body.offers[*].inclusions[*].*": {
+            "match": "type"
+          },
+          "$.body.offers[*].inclusions[*].type": {
+            "match": "type"
+          },
+          "$.body.offers[*].inclusions[*].value": {
+            "match": "type"
+          },
+          "$.body.offers[*].inclusions[*].disclaimer": {
+            "match": "type"
+          },
+          "$.body.offers[*].inclusions[*].title": {
+            "match": "type"
+          },
+          "$.body.offers[*].inclusions[*].name": {
+            "match": "type"
+          },
+          "$.body.offers[*].disclaimers": {
+            "min": 1
+          },
+          "$.body.offers[*].disclaimers[*].*": {
+            "match": "type"
+          },
+          "$.body.offers[*].disclaimers[*].id": {
+            "match": "type"
+          },
+          "$.body.offers[*].disclaimers[*].index": {
+            "match": "type"
+          },
+          "$.body.offers[*].disclaimers[*].description": {
+            "match": "type"
+          },
+          "$.body.warrantyAndService": {
+            "match": "type"
+          },
+          "$.body.warrantyAndService.warrantyYears": {
+            "match": "type"
+          },
+          "$.body.warrantyAndService.warrantyKm": {
+            "match": "type"
+          },
+          "$.body.warrantyAndService.regularServiceKms": {
+            "match": "type"
+          },
+          "$.body.warrantyAndService.regularServiceMonths": {
+            "match": "type"
+          },
+          "$.body.warrantyAndService.warrantyCustomerAssist": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "A GET request to retrieve a valid mapped specification with a listed path",
+      "providerState": "A valid mapped specification item to retrieve",
+      "request": {
+        "method": "get",
+        "path": "/api/v1/spec/carsales/mappings/SPOT-ITM-123456",
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "make": "Honda",
+          "marketingGroup": "Civic",
+          "model": "Civic",
+          "badge": "VTi-LX",
+          "bodyStyle": "Hatch"
+        },
+        "matchingRules": {
+          "$.body.make": {
+            "match": "type"
+          },
+          "$.body.marketingGroup": {
+            "match": "type"
+          },
+          "$.body.model": {
+            "match": "type"
+          },
+          "$.body.badge": {
+            "match": "type"
+          },
+          "$.body.bodyStyle": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "A POST request to retrieve valid stock with a listed path",
+      "providerState": "A valid stock item to retrieve",
+      "request": {
+        "method": "post",
+        "path": "/api/v2/stock/carsales",
+        "headers": {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "make": "Honda",
+          "model": "Civic",
+          "bodyType": "hatch",
+          "badge": "VTi-LX",
+          "siloTypes": [
+            "Brand new cars in stock"
+          ],
+          "isCertifiedPreOwned": false
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "items": [
+            {
+              "title": "title",
+              "shortTitle": "short title",
+              "make": "make",
+              "model": "model",
+              "badge": "badge",
+              "series": "series",
+              "year": 34,
+              "releaseMonth": 434,
+              "id": "id",
+              "identifier": "identifier",
+              "photoList": [
+                "photo"
+              ],
+              "state": "state",
+              "suburb": "suburb",
+              "isDisplaySuburb": true,
+              "poaFlag": true,
+              "price": 78943.053,
+              "priceDAP": 843.34
+            }
+          ],
+          "searchQuery": "https://www.carsales.com.au/cars/results?q=(And.Service.Carsales._.(C.Make.Honda._.(C.Model.Civic._.Badge.VTi-LX.))_.(Or.SiloType.Brand%20new%20cars%20in%20stock._.SiloType.Demo%20and%20near%20new%20cars.))",
+          "count": 80
+        },
+        "matchingRules": {
+          "$.body.items": {
+            "min": 1
+          },
+          "$.body.items[*].*": {
+            "match": "type"
+          },
+          "$.body.items[*].title": {
+            "match": "type"
+          },
+          "$.body.items[*].shortTitle": {
+            "match": "type"
+          },
+          "$.body.items[*].make": {
+            "match": "type"
+          },
+          "$.body.items[*].model": {
+            "match": "type"
+          },
+          "$.body.items[*].badge": {
+            "match": "type"
+          },
+          "$.body.items[*].series": {
+            "match": "type"
+          },
+          "$.body.items[*].year": {
+            "match": "type"
+          },
+          "$.body.items[*].releaseMonth": {
+            "match": "type"
+          },
+          "$.body.items[*].id": {
+            "match": "type"
+          },
+          "$.body.items[*].identifier": {
+            "match": "type"
+          },
+          "$.body.items[*].photoList": {
+            "min": 1
+          },
+          "$.body.items[*].photoList[*].*": {
+            "match": "type"
+          },
+          "$.body.items[*].state": {
+            "match": "type"
+          },
+          "$.body.items[*].suburb": {
+            "match": "type"
+          },
+          "$.body.items[*].isDisplaySuburb": {
+            "match": "type"
+          },
+          "$.body.items[*].poaFlag": {
+            "match": "type"
+          },
+          "$.body.items[*].price": {
+            "match": "type"
+          },
+          "$.body.items[*].priceDAP": {
+            "match": "type"
+          },
+          "$.body.searchQuery": {
+            "match": "type"
+          },
+          "$.body.count": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

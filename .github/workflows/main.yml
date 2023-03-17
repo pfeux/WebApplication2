@@ -2,41 +2,65 @@ name: learn-github-actions
 run-name: ${{ github.actor }} is learning Github Actions
 on: [push]
 jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Prepare python
-        uses: actions/setup-python@v4.5.0
-        with:
-          python-version: 3.11.0
+    setup-job:
+        name: Checkout repo
+        runs-on: ubuntu-latest
+        outputs:
+            application_name: ${{ steps.set-env.outputs.appname }}
+        steps:
+        - name: Code checkout
+          uses: actions/checkout@v2
+
+        - name: Set env
+          id: set-env
+          run: |
+            echo "appname=$APP_NAME" >> $GITHUB_OUTPUT
+
+    build-docker-image:
+        name: Build and push docker image
+        needs: [setup-job]
+        runs-on: ubuntu-latest
+        steps:
+        - name: Build image
+          run: |
+            docker build * -f Dockerfile --tag webapplication2 .        
+
+    pacttest-uploader:
+        runs-on: ubuntu-latest
+        needs: [setup-job, build-docker-image]
+        steps:
+        - name: Prepare python
+          uses: actions/setup-python@v4.5.0
+          with:
+            python-version: 3.11.0
           
-      - name: run id
-        run: echo ${{ github.run_id }}
-      - name: run number
-        run: echo ${{ github.run_number }}
+        - name: Setup docker container
+          id: setup-container
+          run: |
+              container_id=`docker create `${{ needs.build-docker-image.outputs.published_image_path }}`
+              if [$?=0]; then
+                mkdir -p files
+                docker cp $container_id:/app/pacts files
+                docker rm $container_id
+                ls -alhR files
+              else
+                echo "Unable to run the image: ${{ needs.build-docker-image.outputs.published_image_path }}"
+                exit 1
+              fi
+              echo "containerId=$container_id" >> $GITHUB_OUTPUT
       
-      - name: Prepare python script
-        id: python-script
-        run: |
-          PYTHON_SCRIPT=$(cat <<EOF
-          import json, urllib.request
-          with open('/mnt/c/Kishan/repos/csn.showroom.cms.api/ConsumerPact.Tests/bin/Debug/pacts/Csn.Showroom.CMS.Api-Csn.Showroom.Spec.Api.json') as json_data:
-              pact = json.load(json_data)
-              pact_url = 'http://pact-broker.stg.commercial.csnglobal.net/pacts/provider/{}/consumer/{}/version/{}'.format(pact['provider']['name'],pact['consumer']['name'], 1)
-              opener = urllib.request.build_opener(urllib.request.HTTPHandler)
-              request = urllib.request.Request(pact_url, data=json.dumps(pact).encode('utf-8'))
-              request.add_header('Content-Type', 'application/json')
-              request.add_header('Authorization','Basic dXfltyFMgNOFZAxr8io9wJ37iUpY42M:O5AIZWxelWbLvqMd8PkAVycBJh2Psyg1')
-              request.get_method = lambda: 'PUT'
-              print(pact_url)
-              url = opener.open(request, timeout = 10)
-              response = url.read()
-              print(response)
-          EOF
-          )
-          python -c "$PYTHON_SCRIPT"
-      
-  check-node-version:
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm -v
+        - name: Prepare python script
+          id: python-script
+          run: |
+              PYTHON_SCRIPT=$(cat <<EOF
+              import glob, os json, urllib.request
+              version = ${{ github.run_id }}
+              os.chdir('files')
+              for f in glob.glob('*.json'):
+                  with open(f) as json_data:
+                      pact = json.load(json_data)
+                      pact_url = 'http://pact-broker.stg.commercial.csnglobal.net/pacts/provider/{}/consumer/{}/version/{}'.format(pact['provider']['name'],pact['consumer']['name'], 1)
+                      print(response)
+              EOF
+              )
+              python -c "$PYTHON_SCRIPT"

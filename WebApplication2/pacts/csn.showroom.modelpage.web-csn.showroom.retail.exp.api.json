@@ -1,0 +1,64 @@
+{
+  "consumer": {
+    "name": "Csn.Showroom.ModelPage.Web"
+  },
+  "provider": {
+    "name": "Csn.Showroom.Retail.Exp.Api"
+  },
+  "interactions": [
+    {
+      "description": "A GET request to retrieve all content hubs",
+      "providerState": "A list of content hubs exists",
+      "request": {
+        "method": "get",
+        "path": "/api/v1/content-hubs/carsales",
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": [
+          {
+            "url": "http://someurl/goes/here",
+            "hubName": "electric",
+            "title": "Title goes here",
+            "backgroundImage": "http://pxcrush.com.au/backgroundImage",
+            "logoUrl": "http://pxcrush.com.au/logoUrl"
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 1
+          },
+          "$.body[*].*": {
+            "match": "type"
+          },
+          "$.body[*].url": {
+            "match": "type"
+          },
+          "$.body[*].hubName": {
+            "match": "type"
+          },
+          "$.body[*].title": {
+            "match": "type"
+          },
+          "$.body[*].backgroundImage": {
+            "match": "type"
+          },
+          "$.body[*].logoUrl": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
