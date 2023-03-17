@@ -14,9 +14,9 @@ jobs:
         - name: Build image
           id: build-image
           run: |
-            docker build -f Dockerfile --tag ttl.sh/webapplication2:2h .
-            docker push ttl.sh/webapplication2:2h
-            echo "image-id=ttl.sh/webapplication2:2h" >> $GITHUB_OUTPUT
+            docker build -f Dockerfile --tag ghcr.io/kishanhathiwala/webapplication2:latest .
+            docker push ghcr.io/kishanhathiwala/webapplication2:latest
+            echo "image-id=ghcr.io/kishanhathiwala/webapplication2:latest" >> $GITHUB_OUTPUT
 
     pacttest-uploader:
         runs-on: ubuntu-latest
