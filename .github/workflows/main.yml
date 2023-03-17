@@ -18,7 +18,7 @@ jobs:
             ls -alh
             docker build -f Dockerfile --tag ttl.sh/webapplication2:2h .
             docker push ttl.sh/webapplication2:2h
-            echo "image-id=ttl.sh/webapplications2:2h" >> $GITHUB_OUTPUT
+            echo "image-id=ttl.sh/webapplication2:2h" >> $GITHUB_OUTPUT
 
     pacttest-uploader:
         runs-on: ubuntu-latest
