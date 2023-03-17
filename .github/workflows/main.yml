@@ -28,33 +28,6 @@ jobs:
             python-version: 3.11.0
           
         - name: Setup docker container
-          id: setup-container
-          run: |
-              docker container ls --no-trunc
-              container_id=`docker run -d ${{ needs.build-docker-image.outputs.published_image_path }}`
-              if [$?=0]; then
-                mkdir -p files
-                docker cp $container_id:/app/pacts files
-                docker rm $container_id -f
-                ls -alhR files
-              else
-                echo "Unable to run the image: ${{ needs.build-docker-image.outputs.published_image_path }}"
-                exit 1
-              fi
-              echo "containerId=$container_id" >> $GITHUB_OUTPUT
-      
-        - name: Prepare python script
-          id: python-script
-          run: |
-              PYTHON_SCRIPT=$(cat <<EOF
-              import glob, os json, urllib.request
-              version = ${{ github.run_id }}
-              os.chdir('files')
-              for f in glob.glob('*.json'):
-                  with open(f) as json_data:
-                      pact = json.load(json_data)
-                      pact_url = 'http://pact-broker.stg.commercial.csnglobal.net/pacts/provider/{}/consumer/{}/version/{}'.format(pact['provider']['name'],pact['consumer']['name'], 1)
-                      print(response)
-              EOF
-              )
-              python -c "$PYTHON_SCRIPT"
+          uses: kishanhathiwala/WebApplications2/.github/actions/pacttest-uploader@latest
+          with:
+            DOCKER_IMAGE_URL: ${{ needs.build-docker-image.outputs.published_image_path }}
