@@ -23,7 +23,7 @@ jobs:
         steps:
         - name: Build image
           run: |
-            docker build --tag webapplication2 .
+            docker build -f ../Dockerfile --tag webapplication2 .
 
     pacttest-uploader:
         runs-on: ubuntu-latest
