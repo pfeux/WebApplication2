@@ -27,6 +27,9 @@ jobs:
           with:
             python-version: 3.11.0
           
+        - name: Code checkout
+          uses: actions/checkout@v3
+
         - name: Setup docker container
           uses: ./.github/actions/pacttest-uploader
           with:
