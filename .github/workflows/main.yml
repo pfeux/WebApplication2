@@ -31,6 +31,9 @@ jobs:
         - name: Code checkout
           uses: actions/checkout@v3
 
+        - name: Login to github registry
+          run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u kishanhathiwala --password-stdin
+
         - name: Setup docker container
           uses: ./.github/actions/pacttest-uploader
           with:

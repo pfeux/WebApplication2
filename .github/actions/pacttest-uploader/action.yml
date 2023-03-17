@@ -4,12 +4,12 @@ inputs:
     DOCKER_IMAGE_URL:
         description: 'Full URL for docker image'
         required: true
+
 runs:
     using: 'composite'
     steps:
     - name: Setup docker container
       run: |
-        echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u kishanhathiwala --password-stdin
         docker container ls -a --no-trunc
         container_id=`docker create ${{ inputs.DOCKER_IMAGE_URL }}`
         if [$?=0]; then
