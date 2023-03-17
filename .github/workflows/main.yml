@@ -28,6 +28,6 @@ jobs:
             python-version: 3.11.0
           
         - name: Setup docker container
-          uses: actions/pacttest-uploader@latest
+          uses: ./.github/actions/pacttest-uploader
           with:
             DOCKER_IMAGE_URL: ${{ needs.build-docker-image.outputs.published_image_path }}
