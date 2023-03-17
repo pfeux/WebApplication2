@@ -32,7 +32,7 @@ jobs:
         - name: Setup docker container
           id: setup-container
           run: |
-              container_id=`docker create `${{ needs.build-docker-image.outputs.published_image_path }}`
+              container_id=`docker create ${{ needs.build-docker-image.outputs.published_image_path }}`
               if [$?=0]; then
                 mkdir -p files
                 docker cp $container_id:/app/pacts files
