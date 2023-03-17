@@ -10,14 +10,14 @@ runs:
     - name: Setup docker container
       run: |
         docker container ls -a --no-trunc
-        container_id=`docker create $DOCKER_IMAGE_URL`
+        container_id=`docker create ${{ inputs.DOCKER_IMAGE_URL }}`
         if [$?=0]; then
             mkdir -p files
             docker cp $container_id:/app/pacts files
             docker rm $container_id -f
             ls -alhR files
         else
-            echo 'Unable to run the image - $DOCKER_IMAGE_URL'
+            echo 'Unable to run the image - ${{ inputs.DOCKER_IMAGE_URL }}'
             exit 1
         fi
 
