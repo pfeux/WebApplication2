@@ -9,7 +9,7 @@ jobs:
             application_name: ${{ steps.set-env.outputs.appname }}
         steps:
         - name: Code checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
 
         - name: Set env
           id: set-env
@@ -24,6 +24,7 @@ jobs:
         - name: Build image
           run: |
             pwd
+            cd ..
             ls -alh
             docker build -f ../Dockerfile --tag webapplication2 .
 
