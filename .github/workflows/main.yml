@@ -5,15 +5,19 @@ jobs:
     build-docker-image:
         name: Build and push docker image
         runs-on: ubuntu-latest
+        outputs:
+            published_image_path: ${{ steps.build-image.outputs.image-id }}
         steps:
         - name: Code checkout
           uses: actions/checkout@v3
 
         - name: Build image
+          id: build-image
           run: |
             pwd
             ls -alh
             docker build -f Dockerfile --tag webapplication2 .
+            echo "image-id='webapplications2'" >> $GITHUBOUTPUT
 
     pacttest-uploader:
         runs-on: ubuntu-latest
