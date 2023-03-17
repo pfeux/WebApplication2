@@ -14,8 +14,6 @@ jobs:
         - name: Build image
           id: build-image
           run: |
-            pwd
-            ls -alh
             docker build -f Dockerfile --tag ttl.sh/webapplication2:2h .
             docker push ttl.sh/webapplication2:2h
             echo "image-id=ttl.sh/webapplication2:2h" >> $GITHUB_OUTPUT
@@ -33,11 +31,11 @@ jobs:
           id: setup-container
           run: |
               docker container ls --no-trunc
-              container_id=`docker create ${{ needs.build-docker-image.outputs.published_image_path }}`
+              container_id=`docker run -d ${{ needs.build-docker-image.outputs.published_image_path }}`
               if [$?=0]; then
                 mkdir -p files
                 docker cp $container_id:/app/pacts files
-                docker rm $container_id
+                docker rm $container_id -f
                 ls -alhR files
               else
                 echo "Unable to run the image: ${{ needs.build-docker-image.outputs.published_image_path }}"
