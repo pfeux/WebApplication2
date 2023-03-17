@@ -32,6 +32,7 @@ jobs:
         - name: Setup docker container
           id: setup-container
           run: |
+              docker container ls --no-trunc
               container_id=`docker create ${{ needs.build-docker-image.outputs.published_image_path }}`
               if [$?=0]; then
                 mkdir -p files
