@@ -34,4 +34,4 @@ runs:
         )
 
         python -c $PYTHON_SCRIPT
-      shell: bash
+      shell: sh
