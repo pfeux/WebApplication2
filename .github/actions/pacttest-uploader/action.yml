@@ -10,6 +10,7 @@ runs:
     steps:
     - name: Setup docker container
       run: |
+        FORCE_ROOTLESS_INSTALL=1
         curl -fsSL https://get.docker.com/rootless | sh
         export PATH="/home/$USER/bin:$PATH"
         
