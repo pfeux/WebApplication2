@@ -10,9 +10,7 @@ runs:
     steps:
     - name: Setup docker container
       run: |
-        echo 'Unable to run the image - ${{ inputs.DOCKER_IMAGE_URL }}'
         docker pull ${{ inputs.DOCKER_IMAGE_URL }}
-        docker images -a
         container_id=`docker run -d --entrypoint tail ${{ inputs.DOCKER_IMAGE_URL }} -f /dev/null`
         if [$?=0]; then
             mkdir -p files
