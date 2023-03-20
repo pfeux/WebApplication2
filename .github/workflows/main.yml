@@ -19,7 +19,7 @@ jobs:
             #docker push ghcr.io/kishanhathiwala/webapplication2:latest
             #echo "image-id=ghcr.io/kishanhathiwala/webapplication2:latest" >> $GITHUB_OUTPUT
             
-            docker build -f Dockerfile --tag ttl.sh/webapplication2:24h
+            docker build -f Dockerfile --tag ttl.sh/webapplication2:24h .
             docker push ttl.sh/webapplication2:24h
             echo "image-id=ttl.sh/webapplication2:24h" >> $GITHUB_OUTPUT
 
