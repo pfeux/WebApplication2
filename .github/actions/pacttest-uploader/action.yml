@@ -10,10 +10,7 @@ runs:
     steps:
     - name: Setup docker container
       run: |
-        docker container ls -a --no-trunc
-        docker pull ${{ inputs.DOCKER_IMAGE_URL }}
-        docker images
-        container_id=`docker create ${{ inputs.DOCKER_IMAGE_URL }}`
+        container_id=`docker run -d ${{ inputs.DOCKER_IMAGE_URL }}`
         if [$?=0]; then
             mkdir -p files
             docker cp $container_id:/app/pacts files
