@@ -10,10 +10,7 @@ runs:
     steps:
     - name: Setup docker container
       run: |
-        FORCE_ROOTLESS_INSTALL=1
-        curl -fsSL https://get.docker.com/rootless | sh
-        export PATH="/home/$USER/bin:$PATH"
-        
+        echo 'Unable to run the image - ${{ inputs.DOCKER_IMAGE_URL }}'
         container_id=`docker run -d ${{ inputs.DOCKER_IMAGE_URL }}`
         if [$?=0]; then
             mkdir -p files
