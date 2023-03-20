@@ -12,7 +12,7 @@ runs:
       run: |
         docker pull ${{ inputs.DOCKER_IMAGE_URL }}
         container_id=`docker run -d --entrypoint tail ${{ inputs.DOCKER_IMAGE_URL }} -f /dev/null`
-        if [$?=0]; then
+        if [ $? = "0" ]; then
             mkdir -p files
             docker cp $container_id:/app/pacts files
             docker rm $container_id -f
