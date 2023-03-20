@@ -22,9 +22,7 @@ jobs:
     pacttest-uploader:
         runs-on: ubuntu-latest
         needs: [build-docker-image]
-        permissions:
-            id-token: write
-            contents: write
+        container: docker:20.10.11
         steps:
         - name: Prepare python
           uses: actions/setup-python@v4.5.0
