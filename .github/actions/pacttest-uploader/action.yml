@@ -22,7 +22,7 @@ runs:
             exit 1
         fi
 
-        PYTHON_SCRIPT=$(cat <<EOF
+        export PYTHON_SCRIPT=$(cat <<EOF
         import glob, os, json, urllib.request
         version = ${{ github.run_id }}
         os.chdir('files')
