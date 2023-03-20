@@ -23,16 +23,16 @@ runs:
         fi
 
         export PYTHON_SCRIPT=$(cat <<EOF
-        import glob, os, json, urllib.request
-        version = ${{ github.run_id }}
-        os.chdir('files')
-        for f in glob.glob('*.json'):
-            with open(f) as json_data:
-                pact = json.load(json_data)
-                pact_url = 'http://pact-broker.stg.commercial.csnglobal.net/pacts/provider/{}/consumer/{}/version/{}'.format(pact['provider']['name'],pact['consumer']['name'], 1)
-                print(pact)
-        EOF
-        )
+import glob, os, json, urllib.request
+version = ${{ github.run_id }}
+os.chdir('files')
+for f in glob.glob('*.json'):
+    with open(f) as json_data:
+        pact = json.load(json_data)
+        pact_url = 'http://pact-broker.stg.commercial.csnglobal.net/pacts/provider/{}/consumer/{}/version/{}'.format(pact['provider']['name'],pact['consumer']['name'], 1)
+        print(pact)
+EOF
+)
 
         python -c $PYTHON_SCRIPT
       shell: sh
