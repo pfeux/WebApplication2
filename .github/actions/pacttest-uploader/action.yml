@@ -11,6 +11,7 @@ runs:
     - name: Setup docker container
       run: |
         echo 'Unable to run the image - ${{ inputs.DOCKER_IMAGE_URL }}'
+        docker pull ${{ inputs.DOCKER_IMAGE_URL }}
         docker images -a
         container_id=`docker run -d ${{ inputs.DOCKER_IMAGE_URL }}`
         if [$?=0]; then
