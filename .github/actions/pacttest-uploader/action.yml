@@ -25,7 +25,7 @@ runs:
         python - <<EOF
         import glob, os, json, urllib.request
         version = ${{ github.run_id }}
-        os.chdir('files')
+        os.chdir('files/pacts')
         for f in glob.glob('*.json'):
             with open(f) as json_data:
                 pact = json.load(json_data)
