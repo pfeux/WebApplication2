@@ -1,0 +1,11 @@
+name: temp
+run-name: ${{ github.actor }} is learning Github Actions
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: run id
+        run: echo ${{ github.run_id }}
+      - name: run number
+        run: echo ${{ github.run_number }}
