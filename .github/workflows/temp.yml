@@ -1,11 +1,84 @@
-name: temp
-run-name: ${{ github.actor }} is learning Github Actions
-on: [push]
+name: Deploy to an environment
+
+on:
+  workflow_dispatch:
+    inputs:
+      ENVIRONMENT_TO_DEPLOY: 
+        description: |
+          Which environment to deploy?
+        required: true
+        type: choice
+        default: 'staging'
+        options:
+          - 'staging'
+          - 'production'
+  
 jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: windows-latest
+
     steps:
-      - name: run id
-        run: echo ${{ github.run_id }}
-      - name: run number
-        run: echo ${{ github.run_number }}
+    - uses: actions/checkout@v3
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.3.1
+
+    - name: Build DACPAC for deployment
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /m /p:Configuration=Release /p:OutDir=".\ShowroomCMS\output" ".\ShowroomCMS"
+
+  deploy-to-au-staging:
+    name: Deploy to AU staging
+    if: github.event.inputs.ENVIRONMENT_TO_DEPLOY == 'staging'
+    runs-on: windows-latest
+    needs: [build]
+
+    steps:
+    - name: Add msbuild to PATH
+    - uses: microsoft/setup-msbuild@v1.3.1
+    
+    - name: Deploy staging database
+    - working-directory: C:\Program Files\Microsoft SQL Server\160\DAC\bin
+    - run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms.mssql.csstg.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.AuStagingPassword}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
+
+  deploy-to-latam-staging:
+    name: Deploy to latam staging
+    if: github.event.inputs.ENVIRONMENT_TO_DEPLOY == 'staging'
+    runs-on: windows-latest
+    needs: [build]
+
+    steps:
+    - name: Add msbuild to PATH
+    - uses: microsoft/setup-msbuild@v1.3.1
+    
+    - name: deploy staging database
+    - working-directory: C:\Program Files\Microsoft SQL Server\160\DAC\bin
+    - run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms-latam.mssql.csstg.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.LatamStagingPassword}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
+
+  deploy-to-au-production:
+    name: Deploy to AU Production
+    if: github.event.inputs.ENVIRONMENT_TO_DEPLOY == 'production'
+    runs-on: windows-latest
+    needs: [build]
+
+    steps:
+    - name: Add msbuild to PATH
+    - uses: microsoft/setup-msbuild@v1.3.1
+    
+    - name: deploy staging database
+    - working-directory: C:\Program Files\Microsoft SQL Server\160\DAC\bin
+    - run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms.mssql.csprd.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.AuProductionPassword}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
+
+  deploy-to-latam-production:
+    name: Deploy to latam Production
+    if: github.event.inputs.ENVIRONMENT_TO_DEPLOY == 'production'
+    runs-on: windows-latest
+    needs: [build]
+
+    steps:
+    - name: Add msbuild to PATH
+    - uses: microsoft/setup-msbuild@v1.3.1
+    
+    - name: deploy staging database
+    - working-directory: C:\Program Files\Microsoft SQL Server\160\DAC\bin
+    - run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms-latam.mssql.csprd.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.LatamProductionPassword}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
