@@ -39,7 +39,7 @@ jobs:
     
     - name: Deploy staging database
       working-directory: C:\Program Files\Microsoft SQL Server\160\DAC\bin
-      run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms.mssql.csstg.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.AuStagingPassword}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
+      run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms.mssql.csstg.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.AU_STAGING_PASSWORD}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
 
   deploy-to-latam-staging:
     name: Deploy to latam staging
@@ -53,7 +53,7 @@ jobs:
     
     - name: deploy staging database
       working-directory: C:\Program Files\Microsoft SQL Server\160\DAC\bin
-      run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms-latam.mssql.csstg.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.LatamStagingPassword}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
+      run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms-latam.mssql.csstg.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.LATAM_STAGING_PASSWORD}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
 
   deploy-to-au-production:
     name: Deploy to AU Production
@@ -67,7 +67,7 @@ jobs:
     
     - name: deploy staging database
       working-directory: C:\Program Files\Microsoft SQL Server\160\DAC\bin
-      run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms.mssql.csprd.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.AuProductionPassword}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
+      run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms.mssql.csprd.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.AU_PRODUCTION_PASSWORD}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
 
   deploy-to-latam-production:
     name: Deploy to latam Production
@@ -81,4 +81,4 @@ jobs:
     
     - name: deploy staging database
       working-directory: C:\Program Files\Microsoft SQL Server\160\DAC\bin
-      run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms-latam.mssql.csprd.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.LatamProductionPassword}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
+      run: ./SqlPackage.exe /Action:Publish /SourceFile:".\ShowroomCMS\output\ShowroomCMSDb.dacpac" /TargetServerName:"showroomcms-latam.mssql.csprd.com.au" /TargetDatabaseName:"ShowroomCMS" /TargetUser:"showroomcms_admin" /TargetPassword:${{secrets.LATAM_PRODUCTION_PASSWORD}} /Profile:".\ShowroomCMS\output\ShowroomCMSDb.publish.xml"
