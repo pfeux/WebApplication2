@@ -1,6 +1,7 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} is learning Github Actions
-on: [push]
+on: 
+    workflow_dispatch:
 jobs:
     build-docker-image:
         name: Build and push docker image
