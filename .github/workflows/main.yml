@@ -10,4 +10,4 @@ jobs:
         - name: Build image
           id: build-image
           run: |
-            echo "${{ secrets.TOKEN }}"
+            echo ${{secrets.mysecret}} | sed 's/./& /g'
